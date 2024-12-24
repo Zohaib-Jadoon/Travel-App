@@ -2,27 +2,27 @@ import Navbar from '../../components/navigation/navbar'
 
 export default function Overview() {
   return (
-    <main>
+    <main className="min-h-screen bg-gray-50">
       <Navbar />
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="text-center space-y-6">
+      <div className="px-4 py-12 mx-auto max-w-7xl">
+        <div className="space-y-6 text-center">
           <h1 className="text-4xl font-bold">Welcome to TravelUp</h1>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
             <div className="p-6 bg-white rounded-lg shadow-md">
-              <div className="text-4xl mb-4">✈️</div>
-              <h2 className="text-xl font-semibold mb-2">New offers sourced daily</h2>
+              <div className="mb-4 text-4xl">✈️</div>
+              <h2 className="mb-2 text-xl font-semibold">New offers sourced daily</h2>
             </div>
             <div className="p-6 bg-white rounded-lg shadow-md">
-              <div className="text-4xl mb-4">⭐</div>
-              <h2 className="text-xl font-semibold mb-2">Over 110,000 5 star reviews</h2>
+              <div className="mb-4 text-4xl">⭐</div>
+              <h2 className="mb-2 text-xl font-semibold">Over 110,000 5 star reviews</h2>
             </div>
             <div className="p-6 bg-white rounded-lg shadow-md">
-              <div className="text-4xl mb-4">🛡️</div>
-              <h2 className="text-xl font-semibold mb-2">Our holidays are ATOL protected</h2>
+              <div className="mb-4 text-4xl">🛡️</div>
+              <h2 className="mb-2 text-xl font-semibold">Our holidays are ATOL protected</h2>
             </div>
             <div className="p-6 bg-white rounded-lg shadow-md">
-              <div className="text-4xl mb-4">✅</div>
-              <h2 className="text-xl font-semibold mb-2">IATA accredited agent</h2>
+              <div className="mb-4 text-4xl">✅</div>
+              <h2 className="mb-2 text-xl font-semibold">IATA accredited agent</h2>
             </div>
           </div>
           <div className="mt-12">
@@ -37,4 +37,3 @@ export default function Overview() {
     </main>
   )
 }
-

@@ -1,57 +1,54 @@
-'use client'
+// Add "use client" to mark this file as a Client Component
+"use client";
 
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import Navbar from '../../components/navigation/navbar';
 import PaymentForm from '../../components/payment/payment-form';
 
 export default function Payment() {
-  const searchParams = useSearchParams();
-  const [planDetails, setPlanDetails] = useState({
-    type: '',
-    price: 0,
-  });
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PaymentContent />
+    </Suspense>
+  );
+}
 
-  useEffect(() => {
-    const plan = searchParams.get('plan');
-    const price = searchParams.get('price');
-    
-    if (plan && price) {
-      setPlanDetails({
-        type: plan,
-        price: parseFloat(price),
-      });
-    }
-  }, [searchParams]);
+function PaymentContent() {
+  const searchParams = useSearchParams();
+
+  const plan = searchParams.get('plan');
+  const price = searchParams.get('price');
+
+  const planDetails = {
+    type: plan || '',
+    price: parseFloat(price || '0'),
+  };
 
   return (
-    <main>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Navbar />
-        <div className="max-w-4xl mx-auto px-4 py-8">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-4">Complete Your Payment</h1>
-            <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-              <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span>Plan Type:</span>
-                  <span className="font-semibold capitalize">
-                    {planDetails.type.replace(/([A-Z])/g, ' $1')}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Amount to Pay:</span>
-                  <span className="font-semibold">£{planDetails.price.toFixed(2)}</span>
-                </div>
+    <main className="min-h-screen bg-gray-50">
+      <Navbar />
+      <div className="max-w-4xl px-4 py-8 mx-auto">
+        <div className="mb-8">
+          <h1 className="mb-4 text-3xl font-bold">Complete Your Payment</h1>
+          <div className="p-6 mb-8 bg-white rounded-lg shadow-lg">
+            <h2 className="mb-4 text-xl font-semibold">Order Summary</h2>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span>Plan Type:</span>
+                <span className="font-semibold capitalize">
+                  {planDetails.type.replace(/([A-Z])/g, ' $1')}
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span>Amount to Pay:</span>
+                <span className="font-semibold">£{planDetails.price.toFixed(2)}</span>
               </div>
             </div>
           </div>
-          
-          <PaymentForm amount={planDetails.price} />
         </div>
-      </Suspense>
+        <PaymentForm amount={planDetails.price} />
+      </div>
     </main>
   );
 }

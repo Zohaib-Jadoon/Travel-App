@@ -110,8 +110,8 @@ export default function PaymentForm({ amount }: PaymentFormProps) {
               <input
                 type="text"
                 name="expiry"
-              id="expiry-date"
-              value={cardDetails.expiry}
+                id="expiry-date"
+                value={cardDetails.expiry}
                 onChange={handleInputChange}
                 placeholder="MM/YY"
                 className="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -123,8 +123,8 @@ export default function PaymentForm({ amount }: PaymentFormProps) {
               <input
                 type="text"
                 name="cvv"
-              id="cvv"
-              value={cardDetails.cvv}
+                id="cvv"
+                value={cardDetails.cvv}
                 onChange={handleInputChange}
                 placeholder="123"
                 className="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -201,4 +201,3 @@ export default function PaymentForm({ amount }: PaymentFormProps) {
     </div>
   )
 }
-
