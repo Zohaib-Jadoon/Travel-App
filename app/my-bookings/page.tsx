@@ -2,10 +2,10 @@ import Navbar from '../../components/navigation/navbar'
 
 export default function MyBookings() {
   return (
-    <main>
+    <main className="min-h-screen bg-gray-50">
       <Navbar />
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold mb-8">My Bookings</h1>
+      <div className="px-4 py-12 mx-auto max-w-7xl">
+        <h1 className="mb-8 text-3xl font-bold">My Bookings</h1>
         <div className="space-y-6">
           {[
             {
@@ -23,13 +23,13 @@ export default function MyBookings() {
               status: 'Pending'
             }
           ].map((booking) => (
-            <div key={booking.reference} className="bg-white rounded-lg shadow-md p-6">
-              <div className="flex justify-between items-start">
+            <div key={booking.reference} className="p-6 bg-white rounded-lg shadow-md">
+              <div className="flex items-start justify-between">
                 <div>
-                  <span className="inline-block px-2 py-1 text-sm rounded-full bg-blue-100 text-blue-800 mb-2">
+                  <span className="inline-block px-2 py-1 mb-2 text-sm text-blue-800 bg-blue-100 rounded-full">
                     {booking.type}
                   </span>
-                  <h3 className="text-lg font-semibold mb-1">{booking.details}</h3>
+                  <h3 className="mb-1 text-lg font-semibold">{booking.details}</h3>
                   <p className="text-gray-600">Booking Reference: {booking.reference}</p>
                   <p className="text-gray-600">Date: {booking.date}</p>
                 </div>
@@ -53,4 +53,3 @@ export default function MyBookings() {
     </main>
   )
 }
-

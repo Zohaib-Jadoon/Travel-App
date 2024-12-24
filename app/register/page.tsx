@@ -1,4 +1,4 @@
-// ... (previous imports)
+"use client";
 import { signIn } from 'next-auth/react'
 
 export default function Register() {
@@ -11,7 +11,7 @@ export default function Register() {
   return (
     <div>
       {/* Other component content */}
-      <button onClick={handleGoogleRegister} className="bg-blue-500 text-white px-4 py-2 rounded-md">
+      <button onClick={handleGoogleRegister} className="px-4 py-2 text-white bg-blue-500 rounded-md">
         Register with Google
       </button>
     </div>
