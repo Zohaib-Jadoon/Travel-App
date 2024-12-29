@@ -3,13 +3,14 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { processPayment } from '../../lib/api'
+import { theme } from '../../lib/theme'
 
 interface PaymentFormProps {
   amount: number
+  paymentMethod: 'card' | 'paypal'
 }
 
-export default function PaymentForm({ amount }: PaymentFormProps) {
-  const [paymentMethod, setPaymentMethod] = useState('card')
+export default function PaymentForm({ amount, paymentMethod }: PaymentFormProps) {
   const [isProcessing, setIsProcessing] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
@@ -34,7 +35,7 @@ export default function PaymentForm({ amount }: PaymentFormProps) {
       const response = await processPayment({
         amount,
         currency: 'GBP',
-        paymentMethod: paymentMethod as 'card' | 'paypal',
+        paymentMethod,
         cardDetails: paymentMethod === 'card' ? cardDetails : undefined
       })
 
@@ -52,8 +53,10 @@ export default function PaymentForm({ amount }: PaymentFormProps) {
   }
 
   return (
-    <div className="bg-white p-8 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl">
-      <h2 className="text-2xl font-bold mb-6">Payment Method</h2>
+    <div className={`bg-white p-8 rounded-lg shadow-lg ${theme.animations.slideIn}`}>
+      <h2 className="text-2xl font-bold mb-6">
+        {paymentMethod === 'card' ? 'Enter Card Details' : 'PayPal Payment'}
+      </h2>
       
       {error && (
         <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-600 rounded-lg">
@@ -61,88 +64,58 @@ export default function PaymentForm({ amount }: PaymentFormProps) {
         </div>
       )}
 
-      <div className="mb-6">
-        <div className="flex gap-4 mb-4">
-          <button
-            type="button"
-            onClick={() => setPaymentMethod('card')}
-            className={`flex-1 py-3 px-4 rounded-lg transition-all duration-300 ${
-              paymentMethod === 'card' 
-                ? 'bg-blue-500 text-white shadow-md' 
-                : 'bg-gray-100 hover:bg-gray-200'
-            }`}
-          >
-            Credit Card
-          </button>
-          <button
-            type="button"
-            onClick={() => setPaymentMethod('paypal')}
-            className={`flex-1 py-3 px-4 rounded-lg transition-all duration-300 ${
-              paymentMethod === 'paypal' 
-                ? 'bg-blue-500 text-white shadow-md' 
-                : 'bg-gray-100 hover:bg-gray-200'
-            }`}
-          >
-            PayPal
-          </button>
-        </div>
-      </div>
-
       {paymentMethod === 'card' ? (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Card Number</label>
+            <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700 mb-1">Card Number</label>
             <input
               type="text"
+              id="cardNumber"
               name="number"
-              id="card-number"
               value={cardDetails.number}
               onChange={handleInputChange}
-              placeholder="1234 5678 9012 3456"
-              className="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
               required
             />
           </div>
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Expiry Date</label>
+              <label htmlFor="cardExpiry" className="block text-sm font-medium text-gray-700 mb-1">Expiry Date</label>
               <input
                 type="text"
+                id="cardExpiry"
                 name="expiry"
-              id="expiry-date"
-              value={cardDetails.expiry}
+                value={cardDetails.expiry}
                 onChange={handleInputChange}
                 placeholder="MM/YY"
-                className="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">CVV</label>
+              <label htmlFor="cardCVV" className="block text-sm font-medium text-gray-700 mb-1">CVV</label>
               <input
                 type="text"
+                id="cardCVV"
                 name="cvv"
-              id="cvv"
-              value={cardDetails.cvv}
+                value={cardDetails.cvv}
                 onChange={handleInputChange}
-                placeholder="123"
-                className="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Cardholder Name</label>
+            <label htmlFor="cardName" className="block text-sm font-medium text-gray-700 mb-1">Cardholder Name</label>
             <input
               type="text"
+              id="cardName"
               name="name"
-              id="cardholder-name"
               value={cardDetails.name}
               onChange={handleInputChange}
-              placeholder="John Doe"
-              className="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
               required
             />
           </div>
@@ -150,51 +123,24 @@ export default function PaymentForm({ amount }: PaymentFormProps) {
           <button
             type="submit"
             disabled={isProcessing}
-            className={`w-full py-3 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-300 ${
+            className={`${theme.animations.buttonHover} w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300 ${
               isProcessing ? 'opacity-50 cursor-not-allowed' : ''
             }`}
           >
-            {isProcessing ? (
-              <span className="flex items-center justify-center gap-2">
-                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  />
-                </svg>
-                Processing...
-              </span>
-            ) : (
-              `Pay £${amount.toFixed(2)}`
-            )}
+            {isProcessing ? 'Processing...' : `Pay £${amount.toFixed(2)}`}
           </button>
         </form>
       ) : (
-        <div className="text-center py-8">
-          <button 
+        <div className="text-center">
+          <p className="mb-4">You will be redirected to PayPal to complete your payment.</p>
+          <button
             onClick={handleSubmit}
             disabled={isProcessing}
-            className={`bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-all duration-300 ${
+            className={`${theme.animations.buttonHover} bg-primary text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300 ${
               isProcessing ? 'opacity-50 cursor-not-allowed' : ''
             }`}
           >
-            {isProcessing ? (
-              <span className="flex items-center justify-center gap-2">
-                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  />
-                </svg>
-                Processing...
-              </span>
-            ) : (
-              `Pay £${amount.toFixed(2)} with PayPal`
-            )}
+            {isProcessing ? 'Processing...' : `Pay £${amount.toFixed(2)} with PayPal`}
           </button>
         </div>
       )}

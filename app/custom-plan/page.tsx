@@ -47,7 +47,7 @@ export default function CustomPlan() {
   }
 
   return (
-    <main>
+    <main className="bg-gray-100 min-h-screen">
       <Navbar />
       <div className="max-w-4xl mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-8">Create Your Custom Travel Plan</h1>
@@ -59,7 +59,7 @@ export default function CustomPlan() {
               <button
                 key={service}
                 onClick={() => addItem(service as keyof typeof STANDARD_RATES)}
-                className="p-4 border rounded-lg hover:border-blue-500 transition-all duration-200"
+                className="p-4 border rounded-lg hover:border-primary transition-all duration-200"
               >
                 <div className="font-semibold capitalize">{service.replace(/([A-Z])/g, ' $1')}</div>
                 <div className="text-gray-600">£{rate} per unit</div>
@@ -116,7 +116,7 @@ export default function CustomPlan() {
 
               <button
                 onClick={handleCheckout}
-                className="w-full mt-6 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-all duration-200"
+                className="w-full mt-6 bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-dark transition-all duration-200"
               >
                 Proceed to Payment
               </button>
@@ -133,3 +133,4 @@ export default function CustomPlan() {
     </main>
   )
 }
+

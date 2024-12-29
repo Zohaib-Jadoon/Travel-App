@@ -1,11 +1,12 @@
 import Navbar from '../../components/navigation/navbar'
-
+import { theme } from '../../lib/theme'
+ 
 export default function MyBookings() {
   return (
-    <main>
+    <main className={theme.colors.background}>
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold mb-8">My Bookings</h1>
+        <h1 className={`text-3xl font-bold mb-8 ${theme.fonts.heading} ${theme.colors.text}`}>My Bookings</h1>
         <div className="space-y-6">
           {[
             {
@@ -23,13 +24,13 @@ export default function MyBookings() {
               status: 'Pending'
             }
           ].map((booking) => (
-            <div key={booking.reference} className="bg-white rounded-lg shadow-md p-6">
+            <div key={booking.reference} className={`bg-white rounded-lg shadow-md p-6 ${theme.animations.fadeIn}`}>
               <div className="flex justify-between items-start">
                 <div>
-                  <span className="inline-block px-2 py-1 text-sm rounded-full bg-blue-100 text-blue-800 mb-2">
+                  <span className={`inline-block px-2 py-1 text-sm rounded-full ${theme.colors.secondary} ${theme.colors.text} mb-2`}>
                     {booking.type}
                   </span>
-                  <h3 className="text-lg font-semibold mb-1">{booking.details}</h3>
+                  <h3 className={`text-lg font-semibold mb-1 ${theme.colors.text}`}>{booking.details}</h3>
                   <p className="text-gray-600">Booking Reference: {booking.reference}</p>
                   <p className="text-gray-600">Date: {booking.date}</p>
                 </div>
@@ -41,7 +42,7 @@ export default function MyBookings() {
                   }`}>
                     {booking.status}
                   </span>
-                  <button className="block mt-4 text-blue-500 hover:text-blue-600">
+                  <button className={`block mt-4 ${theme.colors.primary} hover:text-opacity-90`}>
                     View Details →
                   </button>
                 </div>

@@ -2,18 +2,15 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Navbar from '../../../components/navigation/navbar'
-import { processPayment } from '../../../lib/api'
+import { theme } from '../../../lib/theme'
 
-export default function BusTicketBooking() {
+export default function BusTicketReservation() {
   const [formData, setFormData] = useState({
     from: '',
     to: '',
     date: '',
     passengers: '1',
-    busService: '',
   })
-  const [isProcessing, setIsProcessing] = useState(false)
   const router = useRouter()
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -21,115 +18,89 @@ export default function BusTicketBooking() {
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setIsProcessing(true)
-
-    try {
-      // In a real application, you would calculate the actual price based on the booking details
-      const price = 20 * parseInt(formData.passengers) // Placeholder price
-      const response = await processPayment({
-        amount: price,
-        currency: 'GBP',
-        paymentMethod: 'card',
-      })
-
-      if (response.success) {
-        router.push('/payment/success')
-      } else {
-        throw new Error('Payment failed')
-      }
-    } catch (error) {
-      console.error('Booking error:', error)
-      alert('Booking failed. Please try again.')
-    } finally {
-      setIsProcessing(false)
-    }
+    // Here you would typically process the reservation
+    // For now, we'll just redirect to the payment method page
+    router.push('/payment-method')
   }
 
   return (
-    <main>
-      <Navbar />
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8">Book a Bus Ticket</h1>
+    <div className={`bg-background min-h-screen py-12 ${theme.animations.fadeIn}`}>
+      <div className={`max-w-2xl mx-auto bg-card p-8 rounded-lg shadow-md ${theme.animations.slideIn}`}>
+        <h1 className="text-3xl font-bold mb-6 text-center font-heading">Bus Ticket Reservation</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="from" className="block text-sm font-medium text-gray-700">From</label>
-            <input
-              type="text"
-              id="from"
-              name="from"
-              value={formData.from}
-              onChange={handleInputChange}
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            />
+            <div className="mt-1 relative rounded-md shadow-sm">
+              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">&#128205;</span>
+              <input
+                type="text"
+                id="from"
+                name="from"
+                className="pl-10 block w-full border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                value={formData.from}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
           </div>
           <div>
             <label htmlFor="to" className="block text-sm font-medium text-gray-700">To</label>
-            <input
-              type="text"
-              id="to"
-              name="to"
-              value={formData.to}
-              onChange={handleInputChange}
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            />
+            <div className="mt-1 relative rounded-md shadow-sm">
+              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">&#128205;</span>
+              <input
+                type="text"
+                id="to"
+                name="to"
+                className="pl-10 block w-full border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                value={formData.to}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
           </div>
           <div>
             <label htmlFor="date" className="block text-sm font-medium text-gray-700">Date of Travel</label>
-            <input
-              type="date"
-              id="date"
-              name="date"
-              value={formData.date}
-              onChange={handleInputChange}
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            />
+            <div className="mt-1 relative rounded-md shadow-sm">
+              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">&#128197;</span>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                className="pl-10 block w-full border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                value={formData.date}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
           </div>
           <div>
             <label htmlFor="passengers" className="block text-sm font-medium text-gray-700">Number of Passengers</label>
-            <input
-              type="number"
-              id="passengers"
-              name="passengers"
-              value={formData.passengers}
-              onChange={handleInputChange}
-              min="1"
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            />
-          </div>
-          <div>
-            <label htmlFor="busService" className="block text-sm font-medium text-gray-700">Bus Service</label>
-            <select
-              id="busService"
-              name="busService"
-              value={formData.busService}
-              onChange={handleInputChange}
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            >
-              <option value="">Select a bus service</option>
-              <option value="express">Express Bus</option>
-              <option value="local">Local Bus</option>
-              <option value="luxury">Luxury Coach</option>
-            </select>
+            <div className="mt-1 relative rounded-md shadow-sm">
+              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">&#128100;</span>
+              <select
+                id="passengers"
+                name="passengers"
+                className="pl-10 block w-full border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                value={formData.passengers}
+                onChange={handleInputChange}
+              >
+                {[1, 2, 3, 4, 5].map(num => (
+                  <option key={num} value={num}>{num}</option>
+                ))}
+              </select>
+            </div>
           </div>
           <button
             type="submit"
-            disabled={isProcessing}
-            className={`w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
-              isProcessing ? 'opacity-50 cursor-not-allowed' : ''
-            }`}
+            className={`w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300 ${theme.animations.buttonHover}`}
           >
-            {isProcessing ? 'Processing...' : 'Book and Pay'}
+            Reserve Now
           </button>
         </form>
       </div>
-    </main>
+    </div>
   )
 }
 

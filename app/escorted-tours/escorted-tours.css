@@ -1,0 +1,37 @@
+/* Styles for Escorted Tours Page */
+
+/* Background gradient */
+.bg-gradient-to-r {
+  @apply bg-gradient-to-r from-primary to-secondary;
+}
+
+/* Text colors */
+.text-primary {
+  @apply text-primary;
+}
+
+.text-secondary {
+  @apply text-secondary;
+}
+
+/* Hover effects */
+.hover\:bg-opacity-90:hover {
+  @apply bg-opacity-90;
+}
+
+/* Transition effects */
+.transition {
+  @apply transition-all duration-300;
+}
+
+/* Rounded corners */
+.rounded-lg {
+  @apply rounded-lg;
+}
+
+/* Shadow effects */
+.shadow-md {
+  @apply shadow-md;
+}
+
+/* Add more styles as needed */

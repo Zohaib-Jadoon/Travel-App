@@ -10,11 +10,19 @@ module.exports = {
       colors: {
         primary: '#ff6b6b',
         secondary: '#feca57',
-        background: '#f7f1e3',
-        text: '#2c3e50',
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      addUtilities({
+        '.bg-primary': {
+          backgroundColor: '#ff6b6b',
+        },
+        '.bg-secondary': {
+          backgroundColor: '#feca57',
+        },
+      });
+    },
+  ],
 }
-

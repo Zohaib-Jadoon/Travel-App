@@ -1,0 +1,50 @@
+/* Styles for Home Page */
+
+/* Background gradient */
+.bg-gradient-to-r {
+  @apply bg-gradient-to-r from-primary to-secondary;
+}
+
+/* Text colors */
+.text-primary {
+  @apply text-primary;
+}
+
+/* Hover effects */
+.hover\:bg-opacity-90:hover {
+  @apply bg-opacity-90;
+}
+
+/* Transition effects */
+.transition {
+  @apply transition-all duration-300;
+}
+
+/* Rounded corners */
+.rounded-lg {
+  @apply rounded-lg;
+}
+
+/* Shadow effects */
+.shadow-md {
+  @apply shadow-md;
+}
+
+.service-card {
+  animation-duration: 0.3s;
+}
+
+.service-card-delay-0 { animation-delay: 0s; }
+.service-card-delay-1 { animation-delay: 0.2s; }
+.service-card-delay-2 { animation-delay: 0.4s; }
+
+.feature-card {
+  animation-duration: 0.3s;
+}
+
+.feature-card-delay-0 { animation-delay: 0s; }
+.feature-card-delay-1 { animation-delay: 0.15s; }
+.feature-card-delay-2 { animation-delay: 0.3s; }
+.feature-card-delay-3 { animation-delay: 0.45s; }
+
+/* Add more styles as needed */

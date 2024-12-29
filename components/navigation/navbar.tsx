@@ -1,159 +1,155 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
-import { routes, navigationLinks } from '../../lib/routes';
+import { useState, useEffect } from 'react'
 import { useSession, signOut } from 'next-auth/react'
-import Image from 'next/image'
-import PaymentPlansPopup from '../../components/payment-plans-popup';
-import { Menu, X } from 'lucide-react'
+
+const navigationLinks = [
+  { name: 'Flights', path: '/flights' },
+  { name: 'Hotels', path: '/hotels' },
+  { name: 'Holidays', path: '/holidays' },
+  { name: 'Escorted Tours', path: '/escorted-tours' },
+  { name: 'Car Rentals', path: '/reservations/car' },
+  { name: 'Bus Tickets', path: '/reservations/bus' },
+  { name: 'Payment Plans', path: '/payment-plans' },
+];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [isPaymentPopupOpen, setIsPaymentPopupOpen] = useState(false)
+  const [activeLink, setActiveLink] = useState('')
   const { data: session } = useSession()
 
-  const togglePaymentPopup = () => setIsPaymentPopupOpen(!isPaymentPopupOpen)
+  useEffect(() => {
+    setActiveLink(window.location.pathname)
+  }, [])
+
+  const handleLinkClick = (path: string) => {
+    setActiveLink(path)
+    setIsOpen(false)
+  }
 
   return (
-    <nav className="bg-white shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-white shadow-lg">
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link href={routes.overview} className="flex-shrink-0">
-              <Image src="/logo.png" alt="TravelUp" width={120} height={40} className="h-8 w-auto" />
+            <Link href="/" className="flex-shrink-0">
+              <span className="text-2xl font-bold text-primary">TravelUp</span>
             </Link>
-            <div className="hidden md:ml-6 md:flex md:space-x-4">
-              {navigationLinks.map((link: { name: string; path: string }) => (
+          </div>
+          <div className="flex items-center justify-center flex-1">
+            <div className="hidden md:flex md:space-x-1">
+              {navigationLinks.map((link) => (
                 <Link
                   key={link.path}
                   href={link.path}
-                  className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out"
+                  onClick={() => handleLinkClick(link.path)}
+                  className={`nav-link px-4 py-2 rounded-md text-base font-medium transition-all duration-300 ease-in-out
+                    ${activeLink === link.path 
+                      ? 'bg-primary text-white transform scale-105 animate-swipe' 
+                      : 'text-gray-800 hover:bg-primary/10 hover:text-primary'
+                    }
+                  `}
                 >
                   {link.name}
                 </Link>
               ))}
             </div>
           </div>
-          <div className="hidden md:flex md:items-center md:space-x-4">
-            <button
-              onClick={togglePaymentPopup}
-              className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out"
-            >
-              Payment Plans
-            </button>
+          <div className="hidden md:flex md:items-center">
             {session ? (
-              <>
-                <Link
-                  href={routes.profile}
-                  className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out"
-                >
-                  Profile
-                </Link>
-                <button
-                  onClick={() => signOut()}
-                  className="bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out"
-                >
-                  Sign Out
+              <div className="relative group">
+                <button className="flex items-center px-4 py-2 space-x-2 text-base font-medium text-gray-800 transition-all duration-300 rounded-md hover:bg-primary/10 hover:text-primary">
+                  <span>👤</span>
+                  <span>{session.user?.name || 'User'}</span>
                 </button>
-              </>
+                <div className="absolute right-0 z-20 hidden w-48 py-2 mt-2 bg-white rounded-md shadow-xl group-hover:block animate-fadeIn">
+                  <Link
+                    href="/profile"
+                    className="block px-4 py-2 text-sm text-gray-800 transition-all duration-300 hover:bg-primary/10 hover:text-primary"
+                  >
+                    Profile
+                  </Link>
+                  <button
+                    onClick={() => signOut()}
+                    className="w-full px-4 py-2 text-sm text-left text-gray-800 transition-all duration-300 hover:bg-primary/10 hover:text-primary"
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              </div>
             ) : (
-              <>
-                <Link
-                  href={routes.login}
-                  className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out"
-                >
-                  Login
-                </Link>
-                <Link
-                  href={routes.register}
-                  className="bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out"
-                >
-                  Register
-                </Link>
-              </>
+              <Link
+                href="/login"
+                className="px-4 py-2 text-base font-medium text-gray-800 transition-all duration-300 rounded-md hover:bg-primary/10 hover:text-primary"
+              >
+                Login
+              </Link>
             )}
           </div>
           <div className="flex items-center md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+              className="inline-flex items-center justify-center p-2 text-gray-800 transition-all duration-300 rounded-md hover:bg-primary/10 hover:text-primary"
               aria-expanded="false"
             >
               <span className="sr-only">Open main menu</span>
               {isOpen ? (
-                <X className="block h-6 w-6" aria-hidden="true" />
+                <span className="block w-6 h-6" aria-hidden="true">✕</span>
               ) : (
-                <Menu className="block h-6 w-6" aria-hidden="true" />
+                <span className="block w-6 h-6" aria-hidden="true">☰</span>
               )}
             </button>
           </div>
         </div>
       </div>
 
+      {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navigationLinks.map((link: { name: string; path: string }) => (
+        <div className="md:hidden animate-fadeIn">
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            {navigationLinks.map((link) => (
               <Link
                 key={link.path}
                 href={link.path}
-                className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
+                onClick={() => handleLinkClick(link.path)}
+                className={`block px-4 py-2 rounded-md text-base font-medium transition-all duration-300
+                  ${activeLink === link.path
+                    ? 'bg-primary text-white'
+                    : 'text-gray-800 hover:bg-primary/10 hover:text-primary'
+                  }
+                `}
               >
                 {link.name}
               </Link>
             ))}
-            <button
-              onClick={togglePaymentPopup}
-              className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
-            >
-              Payment Plans
-            </button>
             {session ? (
               <>
                 <Link
-                  href={routes.profile}
-                  className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
+                  href="/profile"
+                  className="block px-4 py-2 text-base font-medium text-gray-800 transition-all duration-300 rounded-md hover:bg-primary/10 hover:text-primary"
                 >
                   Profile
                 </Link>
                 <button
                   onClick={() => signOut()}
-                  className="bg-blue-500 text-white hover:bg-blue-600 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
+                  className="w-full px-4 py-2 text-base font-medium text-left text-gray-800 transition-all duration-300 rounded-md hover:bg-primary/10 hover:text-primary"
                 >
                   Sign Out
                 </button>
               </>
             ) : (
-              <>
-                <Link
-                  href={routes.login}
-                  className="text-gray-700 hover:bg-gray-100 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Login
-                </Link>
-                <Link
-                  href={routes.register}
-                  className="bg-blue-500 text-white hover:bg-blue-600 block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Register
-                </Link>
-              </>
+              <Link
+                href="/login"
+                className="block px-4 py-2 text-base font-medium text-gray-800 transition-all duration-300 rounded-md hover:bg-primary/10 hover:text-primary"
+              >
+                Login
+              </Link>
             )}
           </div>
         </div>
       )}
-
-      <PaymentPlansPopup
-        isOpen={isPaymentPopupOpen}
-        onClose={() => setIsPaymentPopupOpen(false)}
-        plans={[
-          { type: 'Flight', price: 299, description: 'London - New York' },
-          { type: 'Hotel', price: 150, description: 'Per night' },
-          { type: 'Car Rental', price: 50, description: 'Per day' },
-          { type: 'Bus Ticket', price: 20, description: 'One-way' },
-        ]}
-      />
     </nav>
   )
 }
+

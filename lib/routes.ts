@@ -1,18 +1,17 @@
 export const routes = {
-  register: '/register',
   home: '/',
-  overview: '/overview',
   flights: '/flights',
   hotels: '/hotels',
   holidays: '/holidays',
   escortedTours: '/escorted-tours',
+  reservations: '/reservations',
   myBookings: '/my-bookings',
   help: '/help',
-  reservations: '/reservations',
   login: '/login',
+  register: '/register',
   profile: '/profile',
-  carBooking: '/reservations/car',
-  busBooking: '/reservations/bus',
+  payment: '/payment',
+  paymentSuccess: '/payment/success',
 }
 
 export const navigationLinks = [

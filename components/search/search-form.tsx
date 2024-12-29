@@ -1,42 +1,45 @@
 'use client'
 
-import { useState } from 'react'
+import { useState } from 'react';
 
 interface SearchFormProps {
-  type: 'flights' | 'hotels' | 'cars'
+  type: 'flights' | 'hotels' | 'cars';
 }
 
 export default function SearchForm({ type }: SearchFormProps) {
-  const [searchType, setSearchType] = useState(type)
-  const [passengers, setPassengers] = useState(1)
-  const [isRoundTrip, setIsRoundTrip] = useState(true)
+  const [searchType, setSearchType] = useState(type);
+  const [passengers, setPassengers] = useState(1);
+  const [isRoundTrip, setIsRoundTrip] = useState(true);
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
-      <div className="flex gap-4 mb-6">
+    <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-xl p-6 space-y-6">
+      <div className="flex gap-4 justify-center">
         <button
           onClick={() => setSearchType('flights')}
-          className={`px-4 py-2 rounded-md ${
-            searchType === 'flights' ? 'bg-blue-500 text-white' : 'bg-gray-100'
-          }`}
+          className={`flex items-center px-4 py-2 rounded-full ${
+            searchType === 'flights' ? 'bg-teal-500 text-white' : 'bg-gray-100 text-gray-700'
+          } transition-colors duration-200`}
         >
-          Flights
+          ✈️
+          <span className="ml-2">Flights</span>
         </button>
         <button
           onClick={() => setSearchType('hotels')}
-          className={`px-4 py-2 rounded-md ${
-            searchType === 'hotels' ? 'bg-blue-500 text-white' : 'bg-gray-100'
-          }`}
+          className={`flex items-center px-4 py-2 rounded-full ${
+            searchType === 'hotels' ? 'bg-teal-500 text-white' : 'bg-gray-100 text-gray-700'
+          } transition-colors duration-200`}
         >
-          Hotels
+          🏨
+          <span className="ml-2">Hotels</span>
         </button>
         <button
           onClick={() => setSearchType('cars')}
-          className={`px-4 py-2 rounded-md ${
-            searchType === 'cars' ? 'bg-blue-500 text-white' : 'bg-gray-100'
-          }`}
+          className={`flex items-center px-4 py-2 rounded-full ${
+            searchType === 'cars' ? 'bg-teal-500 text-white' : 'bg-gray-100 text-gray-700'
+          } transition-colors duration-200`}
         >
-          Cars
+          🚗
+          <span className="ml-2">Cars</span>
         </button>
       </div>
 
@@ -45,36 +48,36 @@ export default function SearchForm({ type }: SearchFormProps) {
           <>
             <div className="flex gap-4">
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700">From</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">From</label>
                 <input
                   type="text"
                   placeholder="City or airport"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="w-full px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 />
               </div>
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700">To</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">To</label>
                 <input
                   type="text"
                   placeholder="City or airport"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="w-full px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 />
               </div>
             </div>
             <div className="flex gap-4">
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700">Departure</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Departure</label>
                 <input
                   type="date"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="w-full px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 />
               </div>
               {isRoundTrip && (
                 <div className="flex-1">
-                  <label className="block text-sm font-medium text-gray-700">Return</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Return</label>
                   <input
                     type="date"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="w-full px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                   />
                 </div>
               )}
@@ -85,26 +88,55 @@ export default function SearchForm({ type }: SearchFormProps) {
         {searchType === 'hotels' && (
           <>
             <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700">Destination</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Destination</label>
               <input
                 type="text"
                 placeholder="City or hotel name"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="w-full px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               />
             </div>
             <div className="flex gap-4">
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700">Check-in</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Check-in</label>
                 <input
                   type="date"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="w-full px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 />
               </div>
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700">Check-out</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Check-out</label>
                 <input
                   type="date"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="w-full px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                />
+              </div>
+            </div>
+          </>
+        )}
+
+        {searchType === 'cars' && (
+          <>
+            <div className="flex-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Pick-up Location</label>
+              <input
+                type="text"
+                placeholder="City or airport"
+                className="w-full px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              />
+            </div>
+            <div className="flex gap-4">
+              <div className="flex-1">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Pick-up Date</label>
+                <input
+                  type="date"
+                  className="w-full px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                />
+              </div>
+              <div className="flex-1">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Drop-off Date</label>
+                <input
+                  type="date"
+                  className="w-full px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -113,11 +145,11 @@ export default function SearchForm({ type }: SearchFormProps) {
 
         <div className="flex gap-4">
           <div className="flex-1">
-            <label className="block text-sm font-medium text-gray-700">Passengers</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Passengers</label>
             <select
               value={passengers}
               onChange={(e) => setPassengers(Number(e.target.value))}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="w-full px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
             >
               {[1, 2, 3, 4, 5, 6].map((num) => (
                 <option key={num} value={num}>
@@ -128,11 +160,11 @@ export default function SearchForm({ type }: SearchFormProps) {
           </div>
           {searchType === 'flights' && (
             <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700">Trip Type</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Trip Type</label>
               <select
                 value={isRoundTrip ? 'round' : 'one'}
                 onChange={(e) => setIsRoundTrip(e.target.value === 'round')}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="w-full px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               >
                 <option value="round">Round trip</option>
                 <option value="one">One way</option>
@@ -143,12 +175,12 @@ export default function SearchForm({ type }: SearchFormProps) {
 
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
+          className="w-full bg-teal-500 text-white px-6 py-3 rounded-md hover:bg-teal-600 transition-colors duration-200 flex items-center justify-center"
         >
-          Search
+          🔍
+          <span className="ml-2">Search</span>
         </button>
       </form>
     </div>
-  )
+  );
 }
-
