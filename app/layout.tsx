@@ -22,7 +22,7 @@ export default function RootLayout({
       </head>
       <body className={`m-0 p-0 ${theme.animations.fadeIn} font-body`}> {/* Updated body className */}
         <NextAuthProvider>
-          <div className="min-h-screen flex flex-col">
+          <div className="flex flex-col min-h-screen">
             <Navbar />
             <main className={`flex-grow ${theme.animations.slideIn}`}>
               {children}
@@ -41,4 +41,3 @@ export default function RootLayout({
     </html>
   )
 }
-

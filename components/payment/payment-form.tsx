@@ -54,12 +54,12 @@ export default function PaymentForm({ amount, paymentMethod }: PaymentFormProps)
 
   return (
     <div className={`bg-white p-8 rounded-lg shadow-lg ${theme.animations.slideIn}`}>
-      <h2 className="text-2xl font-bold mb-6">
+      <h2 className="mb-6 text-2xl font-bold">
         {paymentMethod === 'card' ? 'Enter Card Details' : 'PayPal Payment'}
       </h2>
       
       {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-600 rounded-lg">
+        <div className="p-4 mb-6 text-red-600 border border-red-200 rounded-lg bg-red-50">
           {error}
         </div>
       )}
@@ -67,7 +67,7 @@ export default function PaymentForm({ amount, paymentMethod }: PaymentFormProps)
       {paymentMethod === 'card' ? (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700 mb-1">Card Number</label>
+            <label htmlFor="cardNumber" className="block mb-1 text-sm font-medium text-gray-700">Card Number</label>
             <input
               type="text"
               id="cardNumber"
@@ -81,7 +81,7 @@ export default function PaymentForm({ amount, paymentMethod }: PaymentFormProps)
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="cardExpiry" className="block text-sm font-medium text-gray-700 mb-1">Expiry Date</label>
+              <label htmlFor="cardExpiry" className="block mb-1 text-sm font-medium text-gray-700">Expiry Date</label>
               <input
                 type="text"
                 id="cardExpiry"
@@ -94,7 +94,7 @@ export default function PaymentForm({ amount, paymentMethod }: PaymentFormProps)
               />
             </div>
             <div>
-              <label htmlFor="cardCVV" className="block text-sm font-medium text-gray-700 mb-1">CVV</label>
+              <label htmlFor="cardCVV" className="block mb-1 text-sm font-medium text-gray-700">CVV</label>
               <input
                 type="text"
                 id="cardCVV"
@@ -108,7 +108,7 @@ export default function PaymentForm({ amount, paymentMethod }: PaymentFormProps)
           </div>
 
           <div>
-            <label htmlFor="cardName" className="block text-sm font-medium text-gray-700 mb-1">Cardholder Name</label>
+            <label htmlFor="cardName" className="block mb-1 text-sm font-medium text-gray-700">Cardholder Name</label>
             <input
               type="text"
               id="cardName"

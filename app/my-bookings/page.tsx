@@ -5,7 +5,7 @@ export default function MyBookings() {
   return (
     <main className={theme.colors.background}>
       <Navbar />
-      <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="px-4 py-12 mx-auto max-w-7xl">
         <h1 className={`text-3xl font-bold mb-8 ${theme.fonts.heading} ${theme.colors.text}`}>My Bookings</h1>
         <div className="space-y-6">
           {[
@@ -25,7 +25,7 @@ export default function MyBookings() {
             }
           ].map((booking) => (
             <div key={booking.reference} className={`bg-white rounded-lg shadow-md p-6 ${theme.animations.fadeIn}`}>
-              <div className="flex justify-between items-start">
+              <div className="flex items-start justify-between">
                 <div>
                   <span className={`inline-block px-2 py-1 text-sm rounded-full ${theme.colors.secondary} ${theme.colors.text} mb-2`}>
                     {booking.type}

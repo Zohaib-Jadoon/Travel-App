@@ -36,7 +36,7 @@ function PaymentContent() {
   return (
     <>
       <div className={`bg-white rounded-lg shadow-lg p-6 mb-8 ${theme.animations.slideIn}`}>
-        <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+        <h2 className="mb-4 text-xl font-semibold">Order Summary</h2>
         <div className="space-y-2">
           <div className="flex justify-between">
             <span>Plan Type:</span>
@@ -75,7 +75,7 @@ export default function Payment() {
   return (
     <div className={`bg-background min-h-screen ${theme.animations.fadeIn}`}>
       <Navbar />
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-4xl px-4 py-8 mx-auto">
         <h1 className={`text-3xl font-bold mb-8 ${theme.animations.slideIn}`}>Complete Your Payment</h1>
         <Suspense fallback={<div>Loading...</div>}>
           <PaymentContent />

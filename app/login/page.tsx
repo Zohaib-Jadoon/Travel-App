@@ -35,6 +35,7 @@ export default function Login() {
     }
   }
 
+
   return (
     <div className={`min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 ${theme.colors.background}`}>
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -47,7 +48,7 @@ export default function Login() {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className={`bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 ${theme.animations.fadeIn}`}>
           {error && (
-            <div className="mb-4 p-4 text-sm text-red-700 bg-red-100 rounded-lg">
+            <div className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg">
               {error}
             </div>
           )}
