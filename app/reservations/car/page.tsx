@@ -21,25 +21,23 @@ export default function CarReservation() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically process the reservation
-    // For now, we'll just redirect to the payment method page
     router.push('/payment-method')
   }
 
   return (
-    <div className={`bg-background min-h-screen py-12 ${theme.animations.fadeIn}`}>
-      <div className={`max-w-2xl mx-auto bg-card p-8 rounded-lg shadow-md ${theme.animations.slideIn}`}>
-        <h1 className="text-3xl font-bold mb-6 text-center font-heading">Car Reservation</h1>
+    <div className="min-h-screen py-12 bg-background">
+      <div className="max-w-2xl p-8 mx-auto rounded-lg shadow-md bg-card">
+        <h1 className="mb-6 text-3xl font-bold text-center font-heading">Car Reservation</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="pickupLocation" className="block text-sm font-medium text-gray-700">Pickup Location</label>
-            <div className="mt-1 relative rounded-md shadow-sm">
-              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">&#128205;</span>
+            <label htmlFor="pickupLocation" className="block text-sm font-medium text-foreground">Pickup Location</label>
+            <div className="relative mt-1 rounded-md shadow-sm">
+              <span className="absolute transform -translate-y-1/2 left-3 top-1/2 text-muted-foreground">&#128205;</span>
               <input
                 type="text"
                 id="pickupLocation"
                 name="pickupLocation"
-                className="pl-10 block w-full border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                className="block w-full px-3 py-2 pl-10 text-sm rounded-md border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 value={formData.pickupLocation}
                 onChange={handleInputChange}
                 required
@@ -47,14 +45,14 @@ export default function CarReservation() {
             </div>
           </div>
           <div>
-            <label htmlFor="dropoffLocation" className="block text-sm font-medium text-gray-700">Drop-off Location</label>
-            <div className="mt-1 relative rounded-md shadow-sm">
-              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">&#128205;</span>
+            <label htmlFor="dropoffLocation" className="block text-sm font-medium text-foreground">Drop-off Location</label>
+            <div className="relative mt-1 rounded-md shadow-sm">
+              <span className="absolute transform -translate-y-1/2 left-3 top-1/2 text-muted-foreground">&#128205;</span>
               <input
                 type="text"
                 id="dropoffLocation"
                 name="dropoffLocation"
-                className="pl-10 block w-full border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                className="block w-full px-3 py-2 pl-10 text-sm rounded-md border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 value={formData.dropoffLocation}
                 onChange={handleInputChange}
                 required
@@ -63,14 +61,14 @@ export default function CarReservation() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="pickupDate" className="block text-sm font-medium text-gray-700">Pickup Date</label>
-              <div className="mt-1 relative rounded-md shadow-sm">
-                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">&#128197;</span>
+              <label htmlFor="pickupDate" className="block text-sm font-medium text-foreground">Pickup Date</label>
+              <div className="relative mt-1 rounded-md shadow-sm">
+                <span className="absolute transform -translate-y-1/2 left-3 top-1/2 text-muted-foreground">&#128197;</span>
                 <input
                   type="date"
                   id="pickupDate"
                   name="pickupDate"
-                  className="pl-10 block w-full border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                  className="block w-full px-3 py-2 pl-10 text-sm rounded-md border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   value={formData.pickupDate}
                   onChange={handleInputChange}
                   required
@@ -78,14 +76,14 @@ export default function CarReservation() {
               </div>
             </div>
             <div>
-              <label htmlFor="dropoffDate" className="block text-sm font-medium text-gray-700">Drop-off Date</label>
-              <div className="mt-1 relative rounded-md shadow-sm">
-                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">&#128197;</span>
+              <label htmlFor="dropoffDate" className="block text-sm font-medium text-foreground">Drop-off Date</label>
+              <div className="relative mt-1 rounded-md shadow-sm">
+                <span className="absolute transform -translate-y-1/2 left-3 top-1/2 text-muted-foreground">&#128197;</span>
                 <input
                   type="date"
                   id="dropoffDate"
                   name="dropoffDate"
-                  className="pl-10 block w-full border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                  className="block w-full px-3 py-2 pl-10 text-sm rounded-md border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   value={formData.dropoffDate}
                   onChange={handleInputChange}
                   required
@@ -94,11 +92,11 @@ export default function CarReservation() {
             </div>
           </div>
           <div>
-            <label htmlFor="carType" className="block text-sm font-medium text-gray-700">Car Type</label>
+            <label htmlFor="carType" className="block text-sm font-medium text-foreground">Car Type</label>
             <select
               id="carType"
               name="carType"
-              className="mt-1 block w-full border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+              className="block w-full px-3 py-2 mt-1 text-sm rounded-md border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               value={formData.carType}
               onChange={handleInputChange}
             >
@@ -112,7 +110,7 @@ export default function CarReservation() {
           </div>
           <button
             type="submit"
-            className={`w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300 ${theme.animations.buttonHover}`}
+            className={`w-full bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-primary/90 transition duration-300 ${theme.animations.buttonHover}`}
           >
             Reserve Now
           </button>

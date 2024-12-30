@@ -16,19 +16,17 @@ export default function PaymentMethod() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically process the payment
-    // For now, we'll just redirect to a success page
     router.push('/payment/success')
   }
 
   return (
-    <div className="bg-background min-h-screen py-12">
-      <div className="max-w-md mx-auto bg-card p-8 rounded-lg shadow-md">
-        <h1 className="text-3xl font-bold mb-6 text-center font-heading">Payment Method</h1>
-        <div className="flex justify-center space-x-4 mb-6">
+    <div className="min-h-screen py-12 bg-background">
+      <div className="max-w-md p-8 mx-auto rounded-lg shadow-md bg-card">
+        <h1 className="mb-6 text-3xl font-bold text-center font-heading">Payment Method</h1>
+        <div className="flex justify-center mb-6 space-x-4">
           <button
             className={`${theme.animations.buttonHover} px-4 py-2 rounded-full ${
-              paymentMethod === 'card' ? 'bg-primary text-white' : 'bg-gray-200'
+              paymentMethod === 'card' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'
             }`}
             onClick={() => setPaymentMethod('card')}
           >
@@ -36,7 +34,7 @@ export default function PaymentMethod() {
           </button>
           <button
             className={`${theme.animations.buttonHover} px-4 py-2 rounded-full ${
-              paymentMethod === 'paypal' ? 'bg-primary text-white' : 'bg-gray-200'
+              paymentMethod === 'paypal' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'
             }`}
             onClick={() => setPaymentMethod('paypal')}
           >
@@ -46,22 +44,22 @@ export default function PaymentMethod() {
         {paymentMethod === 'card' ? (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700">Card Number</label>
+              <label htmlFor="cardNumber" className="block text-sm font-medium text-foreground">Card Number</label>
               <input
                 type="text"
                 id="cardNumber"
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
+                className="block w-full px-3 py-2 mt-1 text-sm rounded-md border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 value={cardDetails.number}
                 onChange={(e) => setCardDetails({ ...cardDetails, number: e.target.value })}
                 required
               />
             </div>
             <div>
-              <label htmlFor="cardName" className="block text-sm font-medium text-gray-700">Name on Card</label>
+              <label htmlFor="cardName" className="block text-sm font-medium text-foreground">Name on Card</label>
               <input
                 type="text"
                 id="cardName"
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
+                className="block w-full px-3 py-2 mt-1 text-sm rounded-md border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 value={cardDetails.name}
                 onChange={(e) => setCardDetails({ ...cardDetails, name: e.target.value })}
                 required
@@ -69,11 +67,11 @@ export default function PaymentMethod() {
             </div>
             <div className="flex space-x-4">
               <div className="flex-1">
-                <label htmlFor="cardExpiry" className="block text-sm font-medium text-gray-700">Expiry Date</label>
+                <label htmlFor="cardExpiry" className="block text-sm font-medium text-foreground">Expiry Date</label>
                 <input
                   type="text"
                   id="cardExpiry"
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
+                  className="block w-full px-3 py-2 mt-1 text-sm rounded-md border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   placeholder="MM/YY"
                   value={cardDetails.expiry}
                   onChange={(e) => setCardDetails({ ...cardDetails, expiry: e.target.value })}
@@ -81,11 +79,11 @@ export default function PaymentMethod() {
                 />
               </div>
               <div className="flex-1">
-                <label htmlFor="cardCVV" className="block text-sm font-medium text-gray-700">CVV</label>
+                <label htmlFor="cardCVV" className="block text-sm font-medium text-foreground">CVV</label>
                 <input
                   type="text"
                   id="cardCVV"
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
+                  className="block w-full px-3 py-2 mt-1 text-sm rounded-md border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   value={cardDetails.cvv}
                   onChange={(e) => setCardDetails({ ...cardDetails, cvv: e.target.value })}
                   required
@@ -94,7 +92,7 @@ export default function PaymentMethod() {
             </div>
             <button
               type="submit"
-              className={`${theme.animations.buttonHover} w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300`}
+              className={`${theme.animations.buttonHover} w-full bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-primary/90 transition duration-300`}
             >
               Pay Now
             </button>
@@ -104,7 +102,7 @@ export default function PaymentMethod() {
             <p className="mb-4">You will be redirected to PayPal to complete your payment.</p>
             <button
               onClick={handleSubmit}
-              className={`${theme.animations.buttonHover} bg-primary text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300`}
+              className={`${theme.animations.buttonHover} bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-primary/90 transition duration-300`}
             >
               Proceed to PayPal
             </button>

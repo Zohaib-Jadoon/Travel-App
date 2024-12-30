@@ -9,9 +9,9 @@
   --card-foreground: 0 0% 3.9%;
   --popover: 0 0% 100%;
   --popover-foreground: 0 0% 3.9%;
-  --primary: 0 0% 9%;
+  --primary: 0 72% 51%;
   --primary-foreground: 0 0% 98%;
-  --secondary: 0 0% 96.1%;
+  --secondary: 43 96% 56%;
   --secondary-foreground: 0 0% 9%;
   --muted: 0 0% 96.1%;
   --muted-foreground: 0 0% 45.1%;
@@ -23,6 +23,8 @@
   --input: 0 0% 89.8%;
   --ring: 0 0% 3.9%;
   --radius: 0.5rem;
+  --color-background: 39 17% 93%;
+  --color-text: 210 29% 24%;
 }
 
 .dark {
@@ -32,9 +34,9 @@
   --card-foreground: 0 0% 98%;
   --popover: 0 0% 3.9%;
   --popover-foreground: 0 0% 98%;
-  --primary: 0 0% 98%;
+  --primary: 0 72% 51%;
   --primary-foreground: 0 0% 9%;
-  --secondary: 0 0% 14.9%;
+  --secondary: 43 96% 56%;
   --secondary-foreground: 0 0% 98%;
   --muted: 0 0% 14.9%;
   --muted-foreground: 0 0% 63.9%;
@@ -45,6 +47,8 @@
   --border: 0 0% 14.9%;
   --input: 0 0% 14.9%;
   --ring: 0 0% 83.1%;
+  --color-background: 210 29% 24%;
+  --color-text: 39 17% 93%;
 }
 
 @layer base {
@@ -53,6 +57,55 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: Arial, Helvetica, sans-serif; /* Retained for consistency */
+    font-family: 'Lato', Arial, Helvetica, sans-serif;
   }
 }
+
+@layer components {
+  .btn-primary {
+    @apply transition-colors duration-300 bg-primary text-primary-foreground hover:bg-primary/90;
+  }
+
+  .btn-secondary {
+    @apply transition-colors duration-300 bg-secondary text-secondary-foreground hover:bg-secondary/90;
+  }
+
+  .input-default {
+    @apply border rounded-md shadow-sm border-input focus:border-primary focus:ring-primary;
+  }
+}
+
+/* Additional global styles */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.5s ease-out;
+}
+
+.animate-swipe {
+  animation: swipeRight 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes swipeRight {
+  from { transform: translateX(-10px); opacity: 0.7; }
+  to { transform: translateX(0); opacity: 1; }
+}
+

@@ -26,19 +26,19 @@ export default function PaymentPlans() {
 
   return (
     <div className={`bg-background min-h-screen py-12 ${theme.animations.fadeIn}`}>
-      <div className="max-w-4xl mx-auto px-4">
+      <div className="max-w-4xl px-4 mx-auto">
         <h1 className={`text-3xl font-bold mb-8 text-center ${theme.animations.slideIn}`}>
           Choose Your Payment Plan
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {plans.map((plan) => (
             <div
               key={plan.id}
               className={`bg-white p-6 rounded-lg shadow-md ${theme.animations.slideIn}`}
             >
-              <h2 className="text-xl font-semibold mb-4">{plan.name}</h2>
-              <p className="text-3xl font-bold mb-4">£{plan.price}</p>
-              <p className="text-gray-600 mb-6">{plan.description}</p>
+              <h2 className="mb-4 text-xl font-semibold">{plan.name}</h2>
+              <p className="mb-4 text-3xl font-bold">£{plan.price}</p>
+              <p className="mb-6 text-gray-600">{plan.description}</p>
               <button
                 onClick={() => handleSelectPlan(plan.id)}
                 className={`w-full py-2 px-4 rounded-md ${

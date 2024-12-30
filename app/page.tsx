@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { theme } from '../lib/theme'
+import './home.css'
 
 export default function Home() {
   return (
@@ -45,8 +46,8 @@ export default function Home() {
             ].map((service, index) => (
               <div 
                 key={service.title} 
-                className={`bg-white rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${theme.animations.slideIn}`}
-                style={{ animationDelay: `${index * 0.2}s` }}
+                className={`bg-white rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${theme.animations.slideIn} service-card service-card-delay-${index}`}
+                // style={{ animationDelay: `${index * 0.2}s` }}
               >
                 <h3 className="mb-4 text-2xl font-semibold text-primary">{service.title}</h3>
                 <p className="mb-6 leading-relaxed text-gray-600">{service.description}</p>
@@ -76,8 +77,8 @@ export default function Home() {
             ].map((feature, index) => (
               <div 
                 key={feature.title} 
-                className={`bg-white rounded-lg shadow-md p-6 text-center transform transition-all duration-300 hover:shadow-lg ${theme.animations.slideIn}`}
-                style={{ animationDelay: `${index * 0.15}s` }}
+                className={`bg-white rounded-lg shadow-md p-6 text-center transform transition-all duration-300 hover:shadow-lg ${theme.animations.slideIn} feature-card feature-card-delay-${index}`}
+                // style={{ animationDelay: `${index * 0.15}s` }}
               >
                 <h3 className="mb-3 text-xl font-semibold text-primary">{feature.title}</h3>
                 <p className="leading-relaxed text-gray-600">{feature.description}</p>
@@ -114,3 +115,4 @@ export default function Home() {
     </div>
   )
 }
+

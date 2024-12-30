@@ -20,25 +20,23 @@ export default function BusTicketReservation() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically process the reservation
-    // For now, we'll just redirect to the payment method page
     router.push('/payment-method')
   }
 
   return (
-    <div className={`bg-background min-h-screen py-12 ${theme.animations.fadeIn}`}>
-      <div className={`max-w-2xl mx-auto bg-card p-8 rounded-lg shadow-md ${theme.animations.slideIn}`}>
-        <h1 className="text-3xl font-bold mb-6 text-center font-heading">Bus Ticket Reservation</h1>
+    <div className="min-h-screen py-12 bg-background">
+      <div className="max-w-2xl p-8 mx-auto rounded-lg shadow-md bg-card">
+        <h1 className="mb-6 text-3xl font-bold text-center font-heading">Bus Ticket Reservation</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="from" className="block text-sm font-medium text-gray-700">From</label>
-            <div className="mt-1 relative rounded-md shadow-sm">
-              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">&#128205;</span>
+            <label htmlFor="from" className="block text-sm font-medium text-foreground">From</label>
+            <div className="relative mt-1 rounded-md shadow-sm">
+              <span className="absolute transform -translate-y-1/2 left-3 top-1/2 text-muted-foreground">&#128205;</span>
               <input
                 type="text"
                 id="from"
                 name="from"
-                className="pl-10 block w-full border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                className="block w-full px-3 py-2 pl-10 text-sm rounded-md border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 value={formData.from}
                 onChange={handleInputChange}
                 required
@@ -46,14 +44,14 @@ export default function BusTicketReservation() {
             </div>
           </div>
           <div>
-            <label htmlFor="to" className="block text-sm font-medium text-gray-700">To</label>
-            <div className="mt-1 relative rounded-md shadow-sm">
-              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">&#128205;</span>
+            <label htmlFor="to" className="block text-sm font-medium text-foreground">To</label>
+            <div className="relative mt-1 rounded-md shadow-sm">
+              <span className="absolute transform -translate-y-1/2 left-3 top-1/2 text-muted-foreground">&#128205;</span>
               <input
                 type="text"
                 id="to"
                 name="to"
-                className="pl-10 block w-full border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                className="block w-full px-3 py-2 pl-10 text-sm rounded-md border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 value={formData.to}
                 onChange={handleInputChange}
                 required
@@ -61,14 +59,14 @@ export default function BusTicketReservation() {
             </div>
           </div>
           <div>
-            <label htmlFor="date" className="block text-sm font-medium text-gray-700">Date of Travel</label>
-            <div className="mt-1 relative rounded-md shadow-sm">
-              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">&#128197;</span>
+            <label htmlFor="date" className="block text-sm font-medium text-foreground">Date of Travel</label>
+            <div className="relative mt-1 rounded-md shadow-sm">
+              <span className="absolute transform -translate-y-1/2 left-3 top-1/2 text-muted-foreground">&#128197;</span>
               <input
                 type="date"
                 id="date"
                 name="date"
-                className="pl-10 block w-full border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                className="block w-full px-3 py-2 pl-10 text-sm rounded-md border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 value={formData.date}
                 onChange={handleInputChange}
                 required
@@ -76,13 +74,13 @@ export default function BusTicketReservation() {
             </div>
           </div>
           <div>
-            <label htmlFor="passengers" className="block text-sm font-medium text-gray-700">Number of Passengers</label>
-            <div className="mt-1 relative rounded-md shadow-sm">
-              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">&#128100;</span>
+            <label htmlFor="passengers" className="block text-sm font-medium text-foreground">Number of Passengers</label>
+            <div className="relative mt-1 rounded-md shadow-sm">
+              <span className="absolute transform -translate-y-1/2 left-3 top-1/2 text-muted-foreground">&#128100;</span>
               <select
                 id="passengers"
                 name="passengers"
-                className="pl-10 block w-full border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                className="block w-full px-3 py-2 pl-10 text-sm rounded-md border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 value={formData.passengers}
                 onChange={handleInputChange}
               >
@@ -94,7 +92,7 @@ export default function BusTicketReservation() {
           </div>
           <button
             type="submit"
-            className={`w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300 ${theme.animations.buttonHover}`}
+            className={`w-full bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-primary/90 transition duration-300 ${theme.animations.buttonHover}`}
           >
             Reserve Now
           </button>

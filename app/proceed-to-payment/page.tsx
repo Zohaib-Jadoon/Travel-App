@@ -42,9 +42,9 @@ export default function ProceedToPayment() {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className="bg-background min-h-screen py-12">
-        <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
-          <h1 className="text-3xl font-bold mb-6 text-center">
+      <div className="min-h-screen py-12 bg-background">
+        <div className="max-w-md p-8 mx-auto bg-white rounded-lg shadow-md">
+          <h1 className="mb-6 text-3xl font-bold text-center">
             Proceed to Payment
           </h1>
           <div className="mb-8">
